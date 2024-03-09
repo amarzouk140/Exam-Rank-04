@@ -47,7 +47,8 @@ int main(int ac, char **av, char **env)
     int i = 0;
     int s = 0;
 
-    (void)ac;
+    if (ac > 1)
+    {
     while (av[i] && av[++i])
     {
         av += i;
@@ -58,6 +59,7 @@ int main(int ac, char **av, char **env)
             s = cd(av, i);
         else if (i)
         s = exec(av, env, i);
+    }
     }
     return (s);
 }
