@@ -47,7 +47,7 @@ int main(int ac, char **av, char **env)
     int i = 0;
     int s = 0;
 
-    while (av[i] && av[++i])
+    while (ac && av[i] && av[++i])
     {
         av += i;
         i = 0;
