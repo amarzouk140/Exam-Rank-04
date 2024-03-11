@@ -29,14 +29,14 @@ int exec(char **av, char **env, int i)
     if (!pid)
     {
         av[i] = 0;
-        if ((is_pipe && dup2(fd[1], 1) == -1) || close(fd[0]) == -1 || close(fd[1]) == -1)
+        if (is_pipe && (dup2(fd[1], 1) == -1 || close(fd[0]) == -1 || close(fd[1]) == -1))
             return (print_error("error: fatal\n"));
         execve(*av, av, env);
         return (print_error("error: cannot execute "), print_error(*av), print_error("\n"));
     }
 
     waitpid(pid, &s, 0);
-    if ((is_pipe && (dup2(fd[0], 0)) == -1) || close(fd[0]) == -1 || close(fd[1]) == -1)
+    if (is_pipe && (dup2(fd[0], 0) == -1) || close(fd[0]) == -1 || close(fd[1]) == -1))
         return (print_error("error: fatal\n"));
     
     return (WIFEXITED(s) && WEXITSTATUS(s));
