@@ -36,7 +36,7 @@ int exec(char **av, char **env, int i)
     }
 
     waitpid(pid, &s, 0);
-    if (is_pipe && (dup2(fd[0], 0) == -1) || close(fd[0]) == -1 || close(fd[1]) == -1))
+    if (is_pipe && (dup2(fd[0], 0) == -1 || close(fd[0]) == -1 || close(fd[1]) == -1))
         return (print_error("error: fatal\n"));
     
     return (WIFEXITED(s) && WEXITSTATUS(s));
